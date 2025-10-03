@@ -7,18 +7,33 @@ x-apiservice-env: &apiservice-env
   NUGET_XMLDOC_MODE: skip
   ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
   ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERTIFICATE_PASSWORD}
-  ConnectionStrings__GeminiCatalogDbContext: ${ConnectionStrings__GeminiCatalogDbContext}
 
 services:
   catalog:
     container_name: geminicatalog-api
     image: geminicatalog-api
-    environment: *apiservice-env
+    environment:
+      <<: *apiservice-env
+      ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
     networks:
       - app-network
     ports:
       - "4000:80"
       - "4001:443"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  customer:
+    container_name: geminicustomer-api
+    image: geminicustomer
+    environment:
+      <<: *apiservice-env
+      ConnectionStrings__GeminiCustomerDbContext: ${GeminiCustomerDbContext}
+    networks:
+      - app-network
+    ports:
+      - "4004:80"
+      - "4005:443"
     volumes:
       - ~/.aspnet/https:/https:ro
 
