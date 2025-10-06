@@ -7,10 +7,14 @@ x-apiservice-env: &apiservice-env
   NUGET_XMLDOC_MODE: skip
   ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
   ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERTIFICATE_PASSWORD}
+  AWS__LocalStack__ServiceURL: http://localstack:4566
+  AWS__UseLocalStack: true
+  AWS__Region: us-east-1
+  AWS__Profile: default
 
 services:
   catalog:
-    container_name: geminicatalog-api
+    container_name: geminicatalog
     image: geminicatalog-api
     environment:
       <<: *apiservice-env
@@ -24,7 +28,7 @@ services:
       - ~/.aspnet/https:/https:ro
 
   customer:
-    container_name: geminicustomer-api
+    container_name: geminicustomer
     image: geminicustomer
     environment:
       <<: *apiservice-env
@@ -34,6 +38,23 @@ services:
     ports:
       - "4004:80"
       - "4005:443"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  inventory:
+    container_name: geminiinventory
+    image: geminiinventory
+    # entrypoint: /bin/bash
+    # stdin_open: true
+    # tty: true
+    environment:
+      <<: *apiservice-env
+      ConnectionStrings__GeminiInventoryDbContext: ${GeminiInventoryDbContext}
+    networks:
+      - app-network
+    ports:
+      - "4006:80"
+      - "4007:443"
     volumes:
       - ~/.aspnet/https:/https:ro
 

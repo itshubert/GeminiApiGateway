@@ -11,7 +11,8 @@
       ],
       "UpstreamPathTemplate": "/products",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -25,7 +26,8 @@
       ],
       "UpstreamPathTemplate": "/products/{everything}",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -39,7 +41,8 @@
       ],
       "UpstreamPathTemplate": "/orders",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -53,7 +56,8 @@
       ],
       "UpstreamPathTemplate": "/orders/{everything}",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -67,7 +71,8 @@
       ],
       "UpstreamPathTemplate": "/customers",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -81,7 +86,8 @@
       ],
       "UpstreamPathTemplate": "/customers/{everything}",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -95,7 +101,8 @@
       ],
       "UpstreamPathTemplate": "/inventory",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     },
     {
@@ -109,7 +116,8 @@
       ],
       "UpstreamPathTemplate": "/inventory/{everything}",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post"
       ]
     }
   ]
