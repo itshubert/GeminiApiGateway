@@ -11,11 +11,14 @@ x-apiservice-env: &apiservice-env
   AWS__UseLocalStack: true
   AWS__Region: us-east-1
   AWS__Profile: default
+  Services__CatalogServiceBaseUrl: "http://geminicatalog:80"
+  Services__CustomerServiceBaseUrl: "http://geminicustomer:80"
+  Services__InventoryServiceBaseUrl: "http://geminiinventory:80"
 
 services:
   catalog:
     container_name: geminicatalog
-    image: geminicatalog-api
+    image: geminicatalog
     environment:
       <<: *apiservice-env
       ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
@@ -55,6 +58,20 @@ services:
     ports:
       - "4006:80"
       - "4007:443"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  order:
+    container_name: geminiorder
+    image: geminiorder
+    environment:
+      <<: *apiservice-env
+      ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
+    networks:
+      - app-network
+    ports:
+      - "4002:80"
+      - "4003:443"
     volumes:
       - ~/.aspnet/https:/https:ro
 

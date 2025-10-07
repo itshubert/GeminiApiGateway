@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/products",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4001
+          "Port": 4000
         }
       ],
       "UpstreamPathTemplate": "/products",
@@ -17,11 +17,11 @@
     },
     {
       "DownstreamPathTemplate": "/products/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4001
+          "Port": 4000
         }
       ],
       "UpstreamPathTemplate": "/products/{everything}",
@@ -32,11 +32,11 @@
     },
     {
       "DownstreamPathTemplate": "/orders",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4003
+          "Port": 4002
         }
       ],
       "UpstreamPathTemplate": "/orders",
@@ -47,11 +47,11 @@
     },
     {
       "DownstreamPathTemplate": "/orders/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4003
+          "Port": 4002
         }
       ],
       "UpstreamPathTemplate": "/orders/{everything}",
@@ -62,11 +62,11 @@
     },
     {
       "DownstreamPathTemplate": "/customers",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4005
+          "Port": 4004
         }
       ],
       "UpstreamPathTemplate": "/customers",
@@ -77,11 +77,11 @@
     },
     {
       "DownstreamPathTemplate": "/customers/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4005
+          "Port": 4004
         }
       ],
       "UpstreamPathTemplate": "/customers/{everything}",
@@ -92,11 +92,11 @@
     },
     {
       "DownstreamPathTemplate": "/inventory",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4007
+          "Port": 4006
         }
       ],
       "UpstreamPathTemplate": "/inventory",
@@ -107,11 +107,11 @@
     },
     {
       "DownstreamPathTemplate": "/inventory/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 4007
+          "Port": 4006
         }
       ],
       "UpstreamPathTemplate": "/inventory/{everything}",
