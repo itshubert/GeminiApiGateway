@@ -1,81 +1,81 @@
 x-apiservice-env: &apiservice-env
-  ASPNETCORE_ENVIRONMENT: Development
-  DOTNET_USE_POLLING_FILE_WATCHER: "1"
-  ASPNETCORE_URLS: "http://+:80;https://+:443"
-  DOTNET_RUNNING_IN_CONTAINER: "true"
-  DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "false"
-  NUGET_XMLDOC_MODE: skip
-  ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
-  ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERTIFICATE_PASSWORD}
-  AWS__LocalStack__ServiceURL: http://localstack:4566
-  AWS__UseLocalStack: true
-  AWS__Region: us-east-1
-  AWS__Profile: default
-  Services__CatalogServiceBaseUrl: "http://geminicatalog:80"
-  Services__CustomerServiceBaseUrl: "http://geminicustomer:80"
-  Services__InventoryServiceBaseUrl: "http://geminiinventory:80"
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_USE_POLLING_FILE_WATCHER: "1"
+    ASPNETCORE_URLS: "http://+:80;https://+:443"
+    DOTNET_RUNNING_IN_CONTAINER: "true"
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "false"
+    NUGET_XMLDOC_MODE: skip
+    ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+    ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERTIFICATE_PASSWORD}
+    AWS__LocalStack__ServiceURL: http://localstack:4566
+    AWS__UseLocalStack: true
+    AWS__Region: us-east-1
+    AWS__Profile: default
+    Services__CatalogServiceBaseUrl: "http://geminicatalog:80"
+    Services__CustomerServiceBaseUrl: "http://geminicustomer:80"
+    Services__InventoryServiceBaseUrl: "http://geminiinventory:80"
 
 services:
-  catalog:
-    container_name: geminicatalog
-    image: geminicatalog
-    environment:
-      <<: *apiservice-env
-      ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
-    networks:
-      - app-network
-    ports:
-      - "4000:80"
-      - "4001:443"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+    catalog:
+        container_name: geminicatalog
+        image: geminicatalog
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
+        networks:
+            - app-network
+        ports:
+            - "4000:80"
+            - "4001:443"
+        volumes:
+            - ~/.aspnet/https:/https:ro
 
-  customer:
-    container_name: geminicustomer
-    image: geminicustomer
-    environment:
-      <<: *apiservice-env
-      ConnectionStrings__GeminiCustomerDbContext: ${GeminiCustomerDbContext}
-    networks:
-      - app-network
-    ports:
-      - "4004:80"
-      - "4005:443"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+    customer:
+        container_name: geminicustomer
+        image: geminicustomer
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiCustomerDbContext: ${GeminiCustomerDbContext}
+        networks:
+            - app-network
+        ports:
+            - "4004:80"
+            - "4005:443"
+        volumes:
+            - ~/.aspnet/https:/https:ro
 
-  inventory:
-    container_name: geminiinventory
-    image: geminiinventory
-    # entrypoint: /bin/bash
-    # stdin_open: true
-    # tty: true
-    environment:
-      <<: *apiservice-env
-      ConnectionStrings__GeminiInventoryDbContext: ${GeminiInventoryDbContext}
-    networks:
-      - app-network
-    ports:
-      - "4006:80"
-      - "4007:443"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+    inventory:
+      container_name: geminiinventory
+      image: geminiinventory
+      # entrypoint: /bin/bash
+      # stdin_open: true
+      # tty: true
+      environment:
+        <<: *apiservice-env
+        ConnectionStrings__GeminiInventoryDbContext: ${GeminiInventoryDbContext}
+      networks:
+        - app-network
+      ports:
+        - "4006:80"
+        - "4007:443"
+      volumes:
+        - ~/.aspnet/https:/https:ro
 
-  order:
-    container_name: geminiorder
-    image: geminiorder
-    environment:
-      <<: *apiservice-env
-      ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
-    networks:
-      - app-network
-    ports:
-      - "4002:80"
-      - "4003:443"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+    order:
+        container_name: geminiorder
+        image: geminiorder
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
+        networks:
+            - app-network
+        ports:
+            - "4002:80"
+            - "4003:443"
+        volumes:
+            - ~/.aspnet/https:/https:ro
 
 networks:
-  app-network:
-    driver: bridge
-    external: true
+    app-network:
+        driver: bridge
+        external: true
