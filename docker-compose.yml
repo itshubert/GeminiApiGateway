@@ -45,21 +45,22 @@ services:
             - ~/.aspnet/https:/https:ro
 
     inventory:
-      container_name: geminiinventory
-      image: geminiinventory
-      # entrypoint: /bin/bash
-      # stdin_open: true
-      # tty: true
-      environment:
-        <<: *apiservice-env
-        ConnectionStrings__GeminiInventoryDbContext: ${GeminiInventoryDbContext}
-      networks:
-        - app-network
-      ports:
-        - "4006:80"
-        - "4007:443"
-      volumes:
-        - ~/.aspnet/https:/https:ro
+        container_name: geminiinventory
+        image: geminiinventory
+        # entrypoint: /bin/bash
+        # stdin_open: true
+        # tty: true
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiInventoryDbContext: ${GeminiInventoryDbContext}
+            QueueSettings__OrderSubmitted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-submitted-inventory.fifo"
+        networks:
+            - app-network
+        ports:
+            - "4006:80"
+            - "4007:443"
+        volumes:
+            - ~/.aspnet/https:/https:ro
 
     order:
         container_name: geminiorder
@@ -67,11 +68,43 @@ services:
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
+            QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-order.fifo"
+            QueueSettings__OrderStockFailed: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-stock-failed-order.fifo"
         networks:
             - app-network
         ports:
             - "4002:80"
             - "4003:443"
+        volumes:
+            - ~/.aspnet/https:/https:ro
+
+    orderfulfillment:
+        container_name: geminiorderfulfillment
+        image: geminiorderfulfillment
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiOrderFulfillmentDbContext: ${GeminiOrderFulfillmentDbContext}
+            QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-fulfillment.fifo"
+            QueueSettings__OrderSubmitted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-submitted-fulfillment.fifo"
+            QueueSettings__JobInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-pickinprogress-order.fifo"
+        networks:
+            - app-network
+        ports:
+            - "4008:80"
+        volumes:
+            - ~/.aspnet/https:/https:ro
+
+    warehouse:
+        container_name: geminiwarehouse
+        image: geminiwarehouse
+        environment:
+            <<: *apiservice-env
+            ConnectionStrings__GeminiWarehouseDbContext: ${GeminiWarehouseDbContext}
+            QueueSettings__FulfillmentTaskCreated: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-task-created-warehouse.fifo"
+        networks:
+            - app-network
+        ports:
+            - "4009:80"
         volumes:
             - ~/.aspnet/https:/https:ro
 
