@@ -70,6 +70,7 @@ services:
             ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-order.fifo"
             QueueSettings__OrderStockFailed: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-stock-failed-order.fifo"
+            Queue_Settings__OrderShipped: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-ordershipped-order.fifo"
         networks:
             - app-network
         ports:
@@ -87,6 +88,7 @@ services:
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-fulfillment.fifo"
             QueueSettings__OrderSubmitted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-submitted-fulfillment.fifo"
             QueueSettings__JobInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-pickinprogress-order.fifo"
+            QueueSettings__ShippingLabelGenerated: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/shipping-labelgenerated-fulfillment.fifo"
         networks:
             - app-network
         ports:
