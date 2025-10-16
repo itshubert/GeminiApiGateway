@@ -11,8 +11,9 @@
       ],
       "UpstreamPathTemplate": "/products",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -26,8 +27,9 @@
       ],
       "UpstreamPathTemplate": "/products/{everything}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -41,8 +43,9 @@
       ],
       "UpstreamPathTemplate": "/categories",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -56,8 +59,9 @@
       ],
       "UpstreamPathTemplate": "/categories/{everything}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -71,8 +75,9 @@
       ],
       "UpstreamPathTemplate": "/orders",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -86,8 +91,9 @@
       ],
       "UpstreamPathTemplate": "/orders/{everything}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -101,8 +107,9 @@
       ],
       "UpstreamPathTemplate": "/customers",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -116,8 +123,9 @@
       ],
       "UpstreamPathTemplate": "/customers/{everything}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -131,8 +139,9 @@
       ],
       "UpstreamPathTemplate": "/inventory",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     },
     {
@@ -146,8 +155,41 @@
       ],
       "UpstreamPathTemplate": "/inventory/{everything}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Post"
+        "GET",
+        "POST",
+        "OPTIONS"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/jobs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4009
+        }
+      ],
+      "UpstreamPathTemplate": "/jobs",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "OPTIONS"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/jobs/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4009
+        }
+      ],
+      "UpstreamPathTemplate": "/jobs/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "OPTIONS"
       ]
     }
   ]
