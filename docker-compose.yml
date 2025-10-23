@@ -18,7 +18,7 @@ x-apiservice-env: &apiservice-env
 services:
     catalog:
         container_name: geminicatalog
-        image: geminicatalog
+        image: itshubert/geminicatalog
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
@@ -32,7 +32,7 @@ services:
 
     customer:
         container_name: geminicustomer
-        image: geminicustomer
+        image: itshubert/geminicustomer
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiCustomerDbContext: ${GeminiCustomerDbContext}
@@ -46,7 +46,7 @@ services:
 
     inventory:
         container_name: geminiinventory
-        image: geminiinventory
+        image: itshubert/geminiinventory
         # entrypoint: /bin/bash
         # stdin_open: true
         # tty: true
@@ -64,7 +64,7 @@ services:
 
     order:
         container_name: geminiorder
-        image: geminiorder
+        image: itshubert/geminiorder
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
@@ -81,7 +81,7 @@ services:
 
     orderfulfillment:
         container_name: geminiorderfulfillment
-        image: geminiorderfulfillment
+        image: itshubert/geminiorderfulfillment
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiOrderFulfillmentDbContext: ${GeminiOrderFulfillmentDbContext}
@@ -98,7 +98,7 @@ services:
 
     warehouse:
         container_name: geminiwarehouse
-        image: geminiwarehouse
+        image: itshubert/geminiwarehouse
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiWarehouseDbContext: ${GeminiWarehouseDbContext}
