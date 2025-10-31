@@ -1,0 +1,63 @@
+# LocalStack Environment Variables
+# 
+# IMPORTANT: Sensitive values (database passwords, certificates) should NOT be hardcoded here.
+# Instead, use one of these methods:
+#
+# Method 1: Load from .env file (Recommended for local dev)
+#   Run: .\load-env.ps1
+#   Then: terraform plan
+#
+# Method 2: Set environment variables manually
+#   $env:TF_VAR_catalog_db_connection = "Host=..."
+#   $env:TF_VAR_certificate_password = "..."
+#
+# Method 3: Use -var flag
+#   terraform plan -var="catalog_db_connection=Host=..."
+
+environment          = "localstack"
+aws_region           = "us-east-1"
+project_name         = "gemini"
+use_localstack       = true
+localstack_endpoint  = "http://localhost:4566"
+
+# Certificate password - LOAD FROM .env or environment variable
+# certificate_password = "..." # Don't hardcode - use load-env.ps1
+
+# Database Connection Strings - LOAD FROM .env or environment variables
+# catalog_db_connection        = "..." # Don't hardcode - use load-env.ps1
+# customer_db_connection       = "..." # Don't hardcode - use load-env.ps1
+# inventory_db_connection      = "..." # Don't hardcode - use load-env.ps1
+# order_db_connection          = "..." # Don't hardcode - use load-env.ps1
+# orderfulfillment_db_connection = "..." # Don't hardcode - use load-env.ps1
+# warehouse_db_connection      = "..." # Don't hardcode - use load-env.ps1
+
+# ECS Configuration
+ecs_cluster_name = "gemini-localstack-cluster"
+task_cpu         = "256"
+task_memory      = "512"
+desired_count    = 1
+
+# Image Tags
+catalog_image_tag        = "latest"
+customer_image_tag       = "latest"
+inventory_image_tag      = "latest"
+order_image_tag          = "latest"
+orderfulfillment_image_tag = "latest"
+warehouse_image_tag      = "latest"
+gateway_image_tag        = "latest"
+
+# Networking
+vpc_cidr             = "10.0.0.0/16"
+availability_zones   = ["us-east-1a", "us-east-1b"]
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.10.0/24", "10.0.11.0/24"]
+
+# ECR
+ecr_repository_prefix = "gemini"
+
+# Tags
+tags = {
+  Project     = "Gemini"
+  Environment = "LocalStack"
+  ManagedBy   = "Terraform"
+}

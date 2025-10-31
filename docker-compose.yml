@@ -18,7 +18,7 @@ x-apiservice-env: &apiservice-env
 services:
     catalog:
         container_name: geminicatalog
-        image: geminicatalog
+        image: itshubert/geminicatalog
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiCatalogDbContext: ${GeminiCatalogDbContext}
@@ -32,7 +32,7 @@ services:
 
     customer:
         container_name: geminicustomer
-        image: geminicustomer
+        image: itshubert/geminicustomer
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiCustomerDbContext: ${GeminiCustomerDbContext}
@@ -46,7 +46,7 @@ services:
 
     inventory:
         container_name: geminiinventory
-        image: geminiinventory
+        image: itshubert/geminiinventory
         # entrypoint: /bin/bash
         # stdin_open: true
         # tty: true
@@ -64,16 +64,13 @@ services:
 
     order:
         container_name: geminiorder
-        image: geminiorder
+        image: itshubert/geminiorder
         environment:
             <<: *apiservice-env
-            ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
+            ConnectionStrings__GeminiOrdersDbContext: ${GeminiOrdersDbContext}
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-order.fifo"
             QueueSettings__OrderStockFailed: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-stock-failed-order.fifo"
-            Queue__Settings__OrderInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-orderinprogress-order.fifo"
-            Queue__Settings__OrderReadyForShipment: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-orderreadyforshipment-order.fifo"
             Queue_Settings__OrderShipped: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-ordershipped-order.fifo"
-            Queue__Settings__OrderDelivered: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/carrier-orderdelivered-order.fifo"
         networks:
             - app-network
         ports:
@@ -84,16 +81,16 @@ services:
 
     orderfulfillment:
         container_name: geminiorderfulfillment
-        image: geminiorderfulfillment
+        image: itshubert/geminiorderfulfillment
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiOrderFulfillmentDbContext: ${GeminiOrderFulfillmentDbContext}
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-fulfillment.fifo"
             QueueSettings__OrderSubmitted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-submitted-fulfillment.fifo"
             QueueSettings__JobInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-pickinprogress-fulfillment.fifo"
-            Queue__Settings__JobCompleted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-completed-fulfillment.fifo"
+            QueueSettings__JobCompleted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-completed-fulfillment.fifo"
             QueueSettings__ShippingLabelGenerated: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/shipping-labelgenerated-fulfillment.fifo"
-            Queue__Settings__OrderDelivered: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/carrier-orderdelivered-fulfillment.fifo"
+            Queue_Settings__OrderDelivered: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/carrier-orderdelivered-fulfillment.fifo"
         networks:
             - app-network
         ports:
@@ -103,7 +100,7 @@ services:
 
     warehouse:
         container_name: geminiwarehouse
-        image: geminiwarehouse
+        image: itshubert/geminiwarehouse
         environment:
             <<: *apiservice-env
             ConnectionStrings__GeminiWarehouseDbContext: ${GeminiWarehouseDbContext}
