@@ -67,7 +67,7 @@ services:
         image: itshubert/geminiorder
         environment:
             <<: *apiservice-env
-            ConnectionStrings__GeminiOrderDbContext: ${GeminiOrderDbContext}
+            ConnectionStrings__GeminiOrdersDbContext: ${GeminiOrdersDbContext}
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-order.fifo"
             QueueSettings__OrderStockFailed: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-stock-failed-order.fifo"
             Queue_Settings__OrderShipped: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/fulfillment-ordershipped-order.fifo"
@@ -87,8 +87,10 @@ services:
             ConnectionStrings__GeminiOrderFulfillmentDbContext: ${GeminiOrderFulfillmentDbContext}
             QueueSettings__InventoryReserved: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/inventory-reserved-fulfillment.fifo"
             QueueSettings__OrderSubmitted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/order-submitted-fulfillment.fifo"
-            QueueSettings__JobInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-pickinprogress-order.fifo"
+            QueueSettings__JobInProgress: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-pickinprogress-fulfillment.fifo"
+            QueueSettings__JobCompleted: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/job-completed-fulfillment.fifo"
             QueueSettings__ShippingLabelGenerated: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/shipping-labelgenerated-fulfillment.fifo"
+            Queue_Settings__OrderDelivered: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/carrier-orderdelivered-fulfillment.fifo"
         networks:
             - app-network
         ports:
